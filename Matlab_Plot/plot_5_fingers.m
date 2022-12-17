@@ -62,8 +62,10 @@ for z=1:N_fingers
     title('Accel (m/s^2) IMU');
     Timeline_2_1(z) = line('XData',x,'YData',y);
     TimeValue_2_1(z)= xlabel('');
-    legend({'AccX', 'AccY', 'AccZ'},'Location','northwest','AutoUpdate','off');
+    legend({'Aceleração no eixo X', 'Aceleração no eixo Y', 'Aceleração no eixo Z'},'Location','northwest','AutoUpdate','off');
     axis([0 DATA_SI(7,Nsamples) -2.1 2.1])
+    xlabel('Tempo [s]') 
+    ylabel('Aceleração [g]') 
 end
     %% Plot the angular velocity graph
 %     figure()
@@ -143,11 +145,11 @@ for k=1:Nsamples-1
 
         %Display realtime sensor values
 %          set(TimeValue_1_1(z), 'String', sprintf('Phi: %.2f  Theta: %.2f  Psi: %.2f', PhiSaved(z,k), ThetaSaved(z,k), PsiSaved(z,k)));
-         set(TimeValue_2_1(z), 'String', sprintf('X: %.2f  Y: %.2f  Z: %.2f', DATA_SI((z-1)*20+1,k), DATA_SI((z-1)*20+2,k), DATA_SI((z-1)*20+3,k)));	%acc1
+        % set(TimeValue_2_1(z), 'String', sprintf('X: %.2f  Y: %.2f  Z: %.2f', DATA_SI((z-1)*20+1,k), DATA_SI((z-1)*20+2,k), DATA_SI((z-1)*20+3,k)));	%acc1
 %          set(TimeValue_3_1(z), 'String', sprintf('X: %.2f  Y: %.2f  Z: %.2f', DATA_SI((z-1)*20+4,k), DATA_SI((z-1)*20+5,k), DATA_SI((z-1)*20+6,k)));	%gyro1
         %Display timeline
 %          set(Timeline_1_1(z), 'XData', [DATA_SI(7, k) DATA_SI(7, k)]);
-         set(Timeline_2_1(z), 'XData', [DATA_SI(7, k) DATA_SI(7, k)]);
+         %set(Timeline_2_1(z), 'XData', [DATA_SI(7, k) DATA_SI(7, k)]);
 %          set(Timeline_3_1(z), 'XData', [DATA_SI(7, k) DATA_SI(7, k)]);
     end
     % pause(dt)
