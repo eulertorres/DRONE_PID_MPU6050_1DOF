@@ -36,7 +36,7 @@ void setup(){
 	IMU.configura_accel_gyro(MPU6050_ADDRESS);
 	
 	Serial.print("Valor retornardo pelo registrador WHO_AM_I: "); Serial.println(IMU.verificarID(MPU6050_ADDRESS));
-  delay(1500);
+  delay(8000);
 	setupTime = millis();
 }
 
