@@ -18,7 +18,7 @@ uint8_t MPU6050::verificarID(uint8_t MPUnum)
   return c;
 }
 
-void MPU6050::readMPU6050Data(uint8_t MPUnum, int16_t * destination)
+void MPU6050::LerDadosIMU(uint8_t MPUnum, int16_t * destination)
 {
   uint8_t rawData[14];  // x/y/z accel register data stored here
   readBytes(MPUnum, ACCEL_XOUT_H, 14, &rawData[0]);  // Read the 14 raw data registers into data array

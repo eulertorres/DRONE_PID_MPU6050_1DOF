@@ -23,7 +23,7 @@ class MPU6050
   public: 
   uint8_t verificarID(uint8_t MPUnum);
   void resetar(uint8_t MPUnum);
-  void readMPU6050Data(uint8_t MPUnum, int16_t * destination);
+  void LerDadosIMU(uint8_t MPUnum, int16_t * destination);
   void readAccelData(uint8_t MPUnum, int16_t * destination);
   void readGyroData(uint8_t MPUnum, int16_t * destination);
   void configura_accel_gyro(uint8_t MPUnum);
