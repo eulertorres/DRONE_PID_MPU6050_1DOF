@@ -6,7 +6,7 @@ close all
 % acc_x | acc_y | acc_z | g_x | g_y | g_z | time | 
 %   1       2       3      4     5     6     7     
 fileID = fopen('data.txt','r');
-DATA_SI = fscanf(fileID,'%f', [7 Inf]);
+DATA_SI = fscanf(fileID,'%f', [3 inf]);
 N = size(DATA_SI);
 Nsamples = N(2)-1; %length of DATA
 N_fingers = 1;
@@ -17,15 +17,15 @@ fclose(fileID);
 % ThetaSaved = PhiSaved;
 % PsiSaved   = PhiSaved;
 
-unit_transform_gyro = pi/180;
+%unit_transform_gyro = pi/180;
 
 %Time ms -> s   
-DATA_SI(7,:) = (DATA_SI(7,:)-DATA_SI(7,1))/1000;
+%DATA_SI(3,:) = (DATA_SI(3,:)-DATA_SI(3,1))/1000;
 
 %Angles from 5 fingers aquired from dataset
 % for z = 1:N_fingers
-%     PhiSaved(z, :)   = DATA_SI((z-1)*20+13, :) ;   % pitch
-%     ThetaSaved(z, :) = DATA_SI((z-1)*20+14, :) ;   % roll
+   %  resultado(1, :)   = DATA_SI(1, :) ;   % pitch
+    % erro(3, :) = DATA_SI(3, :) ;   % roll
 %     PsiSaved(z, :)   = DATA_SI((z-1)*20+15, :) ;   % yaw
 %     
 %     %Gyro LSB -> deg/s -> rad/s 
@@ -36,37 +36,38 @@ DATA_SI(7,:) = (DATA_SI(7,:)-DATA_SI(7,1))/1000;
   
     x = [0 0];
     y = [-1000,1000];
-%% Plot the angle graph
-%     figure()
-% for z = 1:N_fingers
-%     subplot(2,5,z)
-%     P1=plot(DATA_SI(7,:), PhiSaved(z,:), 'r'); % roll
-%     hold on
-%     P2=plot(DATA_SI(7,:), ThetaSaved(z,:), 'b'); % pitch
-%     P3=plot(DATA_SI(7,:), PsiSaved(z,:), 'g'); % yaw
-%     refline([0 0])
-%     title('IMU [graus]')
-%     Timeline_1_1(z) = line('XData',x,'YData',y);
-%     TimeValue_1_1(z)= xlabel('');
-%     legend([P1 P2 P3],{'Phi', 'Theta', 'Psi'},'Location','northwest','AutoUpdate','off');
-%     axis([0 DATA_SI(7,Nsamples) -180 180])
-% end
-% 
+% Plot the angle graph
+    figure()
+for z = 1:N_fingers
+    %subplot(2,5,z)
+    %P1=plot(DATA_SI(2,:), DATA_SI(1, :), 'b'); % roll
+    %hold on
+    P2=plot(DATA_SI(2,:), DATA_SI(3, :), 'r'); % pitch
+    %P3=plot(DATA_SI(3,:), PsiSaved(z,:), 'g'); % yaw
+    refline([0 0])
+    title('Erro medidas')
+    %Timeline_1_1(z) = line('XData',x,'YData',y);
+    %TimeValue_1_1(z)= xlabel('');
+    %legend([P1 P2],{'Estimativa', 'Erro'},'Location','northwest','AutoUpdate','off');
+    legend([P2],{'Erro'},'Location','northwest','AutoUpdate','off');
+    axis([0 DATA_SI(2,Nsamples) -180 180])
+end
+
 
     %% Plot the acceleration graph
-    figure()
-for z=1:N_fingers
-    %subplot(5,2,(z-1)*2+1)
-    plot(DATA_SI(7,:),DATA_SI((z-1)*20+1,:),'r',DATA_SI(7,:),DATA_SI((z-1)*20+2,:),'g',DATA_SI(7,:),DATA_SI((z-1)*20+3,:),'b'); % ax ay az
-    refline([0 0])
-    title('Accel (m/s^2) IMU');
-    Timeline_2_1(z) = line('XData',x,'YData',y);
-    TimeValue_2_1(z)= xlabel('');
-    legend({'Aceleração no eixo X', 'Aceleração no eixo Y', 'Aceleração no eixo Z'},'Location','northwest','AutoUpdate','off');
-    axis([0 DATA_SI(7,Nsamples) -2.1 2.1])
-    xlabel('Tempo [s]') 
-    ylabel('Aceleração [g]') 
-end
+%     figure()
+% for z=1:N_fingers
+%     %subplot(5,2,(z-1)*2+1)
+%     plot(DATA_SI(7,:),DATA_SI((z-1)*20+1,:),'r',DATA_SI(7,:),DATA_SI((z-1)*20+2,:),'g',DATA_SI(7,:),DATA_SI((z-1)*20+3,:),'b'); % ax ay az
+%     refline([0 0])
+%     title('Accel (m/s^2) IMU');
+%     Timeline_2_1(z) = line('XData',x,'YData',y);
+%     TimeValue_2_1(z)= xlabel('');
+%     legend({'Aceleração no eixo X', 'Aceleração no eixo Y', 'Aceleração no eixo Z'},'Location','northwest','AutoUpdate','off');
+%     axis([0 DATA_SI(7,Nsamples) -2.1 2.1])
+%     xlabel('Tempo [s]') 
+%     ylabel('Aceleração [g]') 
+% end
     %% Plot the angular velocity graph
 %     figure()
 % for z=1:N_fingers
@@ -126,7 +127,7 @@ end
 %Animate
 for k=1:Nsamples-1
     
-    dt=(DATA_SI(7,k+1)-DATA_SI(7,k));
+    %dt=(DATA_SI(7,k+1)-DATA_SI(7,k));
     %set(Realtime, 'String', sprintf('time = %.2f [s]', DATA_SI(7, k)))
 %     
      for z=1:N_fingers
